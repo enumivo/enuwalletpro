@@ -14,7 +14,7 @@ const {
 /** Configures Fcbuffer for EOS specific structs and types. */
 module.exports = (config = {}, extendedSchema) => {
   const structLookup = (lookupName, account) => {
-    const cachedCode = new Set(['eosio', 'enu.token'])
+    const cachedCode = new Set(['enumivo', 'enu.token'])
     if(cachedCode.has(account)) {
       return structs[lookupName]
     }
@@ -494,7 +494,7 @@ const abiOverride = structLookup => ({
     }
   },
   'setabi.abi.appendByteBuffer': ({fields, object, b}) => {
-    const ser = structLookup('abi_def', 'eosio')
+    const ser = structLookup('abi_def', 'enumivo')
     const b2 = new ByteBuffer(ByteBuffer.DEFAULT_CAPACITY, ByteBuffer.LITTLE_ENDIAN)
     ser.appendByteBuffer(b2, object.abi)
     b.writeVarint32(b2.offset) // length prefix

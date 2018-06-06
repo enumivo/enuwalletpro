@@ -101,10 +101,10 @@ if(process.env['NODE_ENV'] === 'development') {
     it('Eosio token contract parses', (done) => {
       const eos = Eos()
 
-      eos.contract('enu.token', (error, eosio_token) => {
+      eos.contract('enu.token', (error, enumivo_token) => {
         assert(!error, error)
-        assert(eosio_token.transfer, 'enu.token contract')
-        assert(eosio_token.issue, 'enu.token contract')
+        assert(enumivo_token.transfer, 'enu.token contract')
+        assert(enumivo_token.issue, 'enu.token contract')
         done()
       })
     })

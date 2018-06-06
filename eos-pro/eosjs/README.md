@@ -1,15 +1,15 @@
 [![Build Status](https://travis-ci.org/EOSIO/eosjs.svg?branch=master)](https://travis-ci.org/EOSIO/eosjs)
 [![NPM](https://img.shields.io/npm/v/eosjs.svg)](https://www.npmjs.org/package/eosjs)
 
-| [EOSIO/eosjs](/EOSIO/eosjs) | [Npm](https://www.npmjs.com/package/eosjs) | [EOSIO/eos](/EOSIO/eos) | [Docker Hub](https://hub.docker.com/r/eosio/eos/) |
+| [EOSIO/eosjs](/EOSIO/eosjs) | [Npm](https://www.npmjs.com/package/eosjs) | [EOSIO/eos](/EOSIO/eos) | [Docker Hub](https://hub.docker.com/r/enumivo/eos/) |
 | --- | --- | --- | --- |
-| tag: 14.x.x | `npm install eosjs` (version 14) | tag: v1.0.1 | eosio/eos:v1.0.1 |
-| tag: 13.x.x | `npm install eosjs` (version 13) | tag: dawn-v4.2.0 | eosio/eos:20180526 |
-| tag: 12.x.x | `npm install eosjs` (version 12) | tag: dawn-v4.1.0 | eosio/eos:20180519 |
-| tag: 11.x.x | `npm install eosjs@dawn4` (version 11) | tag: dawn-v4.0.0 | eosio/eos:dawn-v4.0.0 |
-| tag: 9.x.x | `npm install eosjs@dawn3` (version 9) | tag: DAWN-2018-04-23-ALPHA | eosio/eos:DAWN-2018-04-23-ALPHA | [local docker](https://github.com/EOSIO/eosjs/tree/DAWN-2018-04-23-ALPHA/docker) |
-| tag: 8.x.x | `npm install eosjs@8` (version 8) | tag: dawn-v3.0.0 | eosio/eos:dawn3x |
-| branch: dawn2 | `npm install eosjs` | branch: dawn-2.x | eosio/eos:dawn2x |
+| tag: 14.x.x | `npm install eosjs` (version 14) | tag: v1.0.1 | enumivo/eos:v1.0.1 |
+| tag: 13.x.x | `npm install eosjs` (version 13) | tag: dawn-v4.2.0 | enumivo/eos:20180526 |
+| tag: 12.x.x | `npm install eosjs` (version 12) | tag: dawn-v4.1.0 | enumivo/eos:20180519 |
+| tag: 11.x.x | `npm install eosjs@dawn4` (version 11) | tag: dawn-v4.0.0 | enumivo/eos:dawn-v4.0.0 |
+| tag: 9.x.x | `npm install eosjs@dawn3` (version 9) | tag: DAWN-2018-04-23-ALPHA | enumivo/eos:DAWN-2018-04-23-ALPHA | [local docker](https://github.com/EOSIO/eosjs/tree/DAWN-2018-04-23-ALPHA/docker) |
+| tag: 8.x.x | `npm install eosjs@8` (version 8) | tag: dawn-v3.0.0 | enumivo/eos:dawn3x |
+| branch: dawn2 | `npm install eosjs` | branch: dawn-2.x | enumivo/eos:dawn2x |
 
 # Eosjs
 
@@ -129,10 +129,10 @@ eos.transfer('inita', 'initb', '2 SYS', 'memo', options)
 eos.transfer('inita', 'initb', '1 SYS', '', false)
 ```
 
-Read-write API methods and documentation are generated from the [eosio_system](https://github.com/EOSIO/eosjs/blob/master/src/schema/eosio_token.json) schema.
+Read-write API methods and documentation are generated from the [enumivo_system](https://github.com/EOSIO/eosjs/blob/master/src/schema/enumivo_token.json) schema.
 
 For more advanced signing, see `keyProvider` in
-[eosjs-keygen](https://github.com/eosio/eosjs-keygen) or
+[eosjs-keygen](https://github.com/enumivo/eosjs-keygen) or
 [unit test](https://github.com/EOSIO/eosjs/blob/master/src/index.test.js).
 
 ### Shorthand
@@ -262,9 +262,9 @@ eos.transaction('currency', currency => {
 })
 
 // mix contracts in the same transaction
-eos.transaction(['currency', 'enu.token'], ({currency, eosio_token}) => {
+eos.transaction(['currency', 'enu.token'], ({currency, enumivo_token}) => {
   currency.transfer('inita', 'initb', '1 CUR', '')
-  eosio_token.transfer('inita', 'initb', '1 SYS', '')
+  enumivo_token.transfer('inita', 'initb', '1 SYS', '')
 })
 
 // contract lookups then transactions
@@ -338,10 +338,10 @@ buffer = eos.fc.toBuffer('extensions_type', type)
 assert.deepEqual(type, eos.fc.fromBuffer('extensions_type', buffer))
 
 // ABI Serialization
-eos.contract('enu.token', (error, c) => eosio_token = c)
+eos.contract('enu.token', (error, c) => enumivo_token = c)
 create = {issuer: 'inita', maximum_supply: '1.0000 SYS'}
-buffer = eosio_token.fc.toBuffer('create', create)
-assert.deepEqual(create, eosio_token.fc.fromBuffer('create', buffer))
+buffer = enumivo_token.fc.toBuffer('create', create)
+assert.deepEqual(create, enumivo_token.fc.fromBuffer('create', buffer))
 ```
 
 Use Node v8+ to `package-lock.json`.
@@ -359,12 +359,12 @@ var {format, api, ecc, json, Fcbuffer} = Eos.modules
   * Blockchain name validation
   * Asset string formatting
 
-* eosjs-api [[Github](https://github.com/eosio/eosjs-api), [NPM](https://www.npmjs.org/package/eosjs-api)]
+* eosjs-api [[Github](https://github.com/enumivo/eosjs-api), [NPM](https://www.npmjs.org/package/eosjs-api)]
   * Remote API to an EOS blockchain node (nodeos)
   * Use this library directly if you need read-only access to the blockchain
     (don't need to sign transactions).
 
-* eosjs-ecc [[Github](https://github.com/eosio/eosjs-ecc), [NPM](https://www.npmjs.org/package/eosjs-ecc)]
+* eosjs-ecc [[Github](https://github.com/enumivo/eosjs-ecc), [NPM](https://www.npmjs.org/package/eosjs-ecc)]
   * Private Key, Public Key, Signature, AES, Encryption / Decryption
   * Validate public or private keys
   * Encrypt or decrypt with EOS compatible checksums
@@ -373,10 +373,10 @@ var {format, api, ecc, json, Fcbuffer} = Eos.modules
 * json {[api](https://github.com/EOSIO/eosjs-api/blob/master/src/api), [schema](https://github.com/EOSIO/eosjs/blob/master/src/schema)},
   * Blockchain definitions (api method names, blockchain schema)
 
-* eosjs-keygen [[Github](https://github.com/eosio/eosjs-keygen), [NPM](https://www.npmjs.org/package/eosjs-keygen)]
+* eosjs-keygen [[Github](https://github.com/enumivo/eosjs-keygen), [NPM](https://www.npmjs.org/package/eosjs-keygen)]
   * private key storage and key management
 
-* Fcbuffer [[Github](https://github.com/eosio/eosjs-fcbuffer), [NPM](https://www.npmjs.org/package/fcbuffer)]
+* Fcbuffer [[Github](https://github.com/enumivo/eosjs-fcbuffer), [NPM](https://www.npmjs.org/package/fcbuffer)]
   * Binary serialization used by the blockchain
   * Clients sign the binary form of the transaction
   * Allows client to know what it is signing

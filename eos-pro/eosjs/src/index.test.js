@@ -76,9 +76,9 @@ if(process.env['NODE_ENV'] === 'development') {
     it('Messages do not sort', async function() {
       const local = Eos()
       const opts = {sign: false, broadcast: false}
-      const tx = await local.transaction(['currency', 'enu.token'], ({currency, eosio_token}) => {
+      const tx = await local.transaction(['currency', 'enu.token'], ({currency, enumivo_token}) => {
         // make sure {account: 'enu.token', ..} remains first
-        eosio_token.transfer('inita', 'initd', '1.1 SYS', '')
+        enumivo_token.transfer('inita', 'initd', '1.1 SYS', '')
 
         // {account: 'currency', ..} remains second (reverse sort)
         currency.transfer('inita', 'initd', '1.2 CUR', '')
@@ -251,18 +251,18 @@ if(process.env['NODE_ENV'] === 'development') {
 
       return eos.transaction(tr => {
         tr.newaccount({
-          creator: 'eosio',
+          creator: 'enumivo',
           name,
           owner: pubkey,
           active: pubkey
         })
         tr.buyrambytes({
-          payer: 'eosio',
+          payer: 'enumivo',
           receiver: name,
           bytes: 8192
         })
         tr.delegatebw({
-          from: 'eosio',
+          from: 'enumivo',
           receiver: name,
           stake_net_quantity: '1.0000 SYS',
           stake_cpu_quantity: '1.0000 SYS',
@@ -359,9 +359,9 @@ if(process.env['NODE_ENV'] === 'development') {
       let amt = 1 // for unique transactions
       const eos = Eos({signProvider})
 
-      const trTest = eosio_token => {
-        assert(eosio_token.transfer('inita', 'initb', amt + ' SYS', '') == null)
-        assert(eosio_token.transfer('initb', 'inita', (amt++) + ' SYS', '') == null)
+      const trTest = enumivo_token => {
+        assert(enumivo_token.transfer('inita', 'initb', amt + ' SYS', '') == null)
+        assert(enumivo_token.transfer('initb', 'inita', (amt++) + ' SYS', '') == null)
       }
 
       const assertTr = tr =>{
@@ -369,19 +369,19 @@ if(process.env['NODE_ENV'] === 'development') {
       }
 
       //  contracts can be a string or array
-      await assertTr(await eos.transaction(['enu.token'], ({eosio_token}) => trTest(eosio_token)))
-      await assertTr(await eos.transaction('enu.token', eosio_token => trTest(eosio_token)))
+      await assertTr(await eos.transaction(['enu.token'], ({enumivo_token}) => trTest(enumivo_token)))
+      await assertTr(await eos.transaction('enu.token', enumivo_token => trTest(enumivo_token)))
     })
 
     it('action to contract (contract tr nesting)', function () {
       this.timeout(4000)
       const tn = Eos({signProvider})
-      return tn.contract('enu.token').then(eosio_token => {
-        return eosio_token.transaction(tr => {
+      return tn.contract('enu.token').then(enumivo_token => {
+        return enumivo_token.transaction(tr => {
           tr.transfer('inita', 'initb', '1 SYS', '')
           tr.transfer('inita', 'initc', '2 SYS', '')
         }).then(() => {
-          return eosio_token.transfer('inita', 'initb', '3 SYS', '')
+          return enumivo_token.transfer('inita', 'initb', '3 SYS', '')
         })
       })
     })
@@ -431,7 +431,7 @@ if(process.env['NODE_ENV'] === 'development') {
         {
           actions: [
             {
-              account: 'eosio',
+              account: 'enumivo',
               name: 'transfer',
               data: {
                 from: 'inita',
@@ -451,7 +451,7 @@ if(process.env['NODE_ENV'] === 'development') {
     })
   })
 
-  // ./eosioc set contract currency build/contracts/currency/currency.wasm build/contracts/currency/currency.abi
+  // ./enumivoc set contract currency build/contracts/currency/currency.wasm build/contracts/currency/currency.abi
   it('Transaction ABI lookup', async function() {
     const eos = Eos()
     const tx = await eos.transaction(

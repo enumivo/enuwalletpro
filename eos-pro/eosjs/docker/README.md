@@ -1,9 +1,9 @@
-Dockerized eosio instance for development and testing.  This container
+Dockerized enumivo instance for development and testing.  This container
 is designed to reset its blockchain and wallet state upon shutdown.
 
 # Start nodeosd
 
-Starting and stopping an eosio instance:
+Starting and stopping an enumivo instance:
 
 ```js
 ./up.sh
@@ -28,13 +28,13 @@ Run all unit test in a temporary instance.  Note, this script will run
 After ./up.sh
 
 ```bash
-docker exec docker_nodeosd_1 ls /opt/eosio/bin
+docker exec docker_nodeosd_1 ls /opt/enumivo/bin
 docker exec docker_nodeosd_1 ls /contracts
-docker cp docker_nodeosd_1:/opt/eosio/bin/nodeos .
+docker cp docker_nodeosd_1:/opt/enumivo/bin/nodeos .
 
 # Or setup an environment:
 . ./dockerc.sh
-keosd ls /opt/eosio/bin
+keosd ls /opt/enumivo/bin
 cleos --help
 ```
 
@@ -42,7 +42,7 @@ cleos --help
 
 ```bash
 # Note, update release
-docker run --rm -it eosio/eos:latest ls /opt/eosio/bin
-docker run -v "$(pwd):/share" --rm -it eosio/eos:latest cp /opt/eosio/bin/nodeos /share
+docker run --rm -it enumivo/eos:latest ls /opt/enumivo/bin
+docker run -v "$(pwd):/share" --rm -it enumivo/eos:latest cp /opt/enumivo/bin/nodeos /share
 ```
 
