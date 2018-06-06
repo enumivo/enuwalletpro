@@ -14,7 +14,7 @@ const {
 /** Configures Fcbuffer for EOS specific structs and types. */
 module.exports = (config = {}, extendedSchema) => {
   const structLookup = (lookupName, account) => {
-    const cachedCode = new Set(['eosio', 'eosio.token'])
+    const cachedCode = new Set(['eosio', 'enu.token'])
     if(cachedCode.has(account)) {
       return structs[lookupName]
     }
@@ -186,7 +186,7 @@ const PublicKeyEcc = (validation) => {
 /** @private */
 function precisionCache(assetCache, value) {
   const symbolInfo = parseExtendedAsset(value)
-  const contract = symbolInfo.contract || 'eosio.token'
+  const contract = symbolInfo.contract || 'enu.token'
 
   let precision
 
@@ -423,7 +423,7 @@ const ExtendedAsset = assetCache => (validation, baseTypes, customTypes) => {
 
     toObject (value) {
       if (validation.defaults && value == null) {
-        return '1.0000 SYS@eosio.token'
+        return '1.0000 SYS@enu.token'
       }
       return toAssetString(value, assetCache, 'extended_asset')
     }

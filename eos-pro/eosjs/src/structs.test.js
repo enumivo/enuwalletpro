@@ -73,7 +73,7 @@ describe('shorthand', () => {
     const eos = Eos()
     const {types} = eos.fc
     const AssetType = types.asset()
-    assertSerializer(AssetType, '1.1 4,SYS@eosio.token', '1.1000 SYS@eosio.token', '1.1000 SYS')
+    assertSerializer(AssetType, '1.1 4,SYS@enu.token', '1.1000 SYS@enu.token', '1.1000 SYS')
   })
 
   it('extended_asset', () => {
@@ -101,10 +101,10 @@ if(process.env['NODE_ENV'] === 'development') {
     it('Eosio token contract parses', (done) => {
       const eos = Eos()
 
-      eos.contract('eosio.token', (error, eosio_token) => {
+      eos.contract('enu.token', (error, eosio_token) => {
         assert(!error, error)
-        assert(eosio_token.transfer, 'eosio.token contract')
-        assert(eosio_token.issue, 'eosio.token contract')
+        assert(eosio_token.transfer, 'enu.token contract')
+        assert(eosio_token.issue, 'enu.token contract')
         done()
       })
     })
@@ -117,7 +117,7 @@ describe('Action.data', () => {
     const eos = Eos({forceActionDataHex: false})
     const {structs, types} = eos.fc
     const value = {
-      account: 'eosio.token',
+      account: 'enu.token',
       name: 'transfer',
       data: {
         from: 'inita',
@@ -134,7 +134,7 @@ describe('Action.data', () => {
     const eos = Eos({forceActionDataHex: true})
     const {structs, types} = eos.fc
     const value = {
-      account: 'eosio.token',
+      account: 'enu.token',
       name: 'transfer',
       data: {
         from: 'inita',
@@ -151,7 +151,7 @@ describe('Action.data', () => {
     const eos = Eos({forceActionDataHex: false})
     const {structs, types} = eos.fc
     const value = {
-      account: 'eosio.token',
+      account: 'enu.token',
       name: 'mytype',
       data: '030a0b0c',
       authorization: []

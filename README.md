@@ -1,6 +1,6 @@
 # eoswalletpro.com
 
-A secure, native eos wallet for storing eos and tokens that follow the eosio.token standard.
+A secure, native eos wallet for storing eos and tokens that follow the enu.token standard.
 
 # How to build locally on unix
 

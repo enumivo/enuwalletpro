@@ -76,15 +76,15 @@ if(process.env['NODE_ENV'] === 'development') {
     it('Messages do not sort', async function() {
       const local = Eos()
       const opts = {sign: false, broadcast: false}
-      const tx = await local.transaction(['currency', 'eosio.token'], ({currency, eosio_token}) => {
-        // make sure {account: 'eosio.token', ..} remains first
+      const tx = await local.transaction(['currency', 'enu.token'], ({currency, eosio_token}) => {
+        // make sure {account: 'enu.token', ..} remains first
         eosio_token.transfer('inita', 'initd', '1.1 SYS', '')
 
         // {account: 'currency', ..} remains second (reverse sort)
         currency.transfer('inita', 'initd', '1.2 CUR', '')
 
       }, opts)
-      assert.equal(tx.transaction.transaction.actions[0].account, 'eosio.token')
+      assert.equal(tx.transaction.transaction.actions[0].account, 'enu.token')
       assert.equal(tx.transaction.transaction.actions[1].account, 'currency')
     })
   })
@@ -120,10 +120,10 @@ if(process.env['NODE_ENV'] === 'development') {
     // avoids a same contract version deploy error.
     // TODO: undeploy contract instead (when API allows this)
 
-    deploy('eosio.msig')
-    deploy('eosio.token')
-    deploy('eosio.bios')
-    deploy('eosio.system')
+    deploy('enu.msig')
+    deploy('enu.token')
+    deploy('enu.bios')
+    deploy('enu.system')
   })
 
   describe('Contracts Load', () => {
@@ -134,8 +134,8 @@ if(process.env['NODE_ENV'] === 'development') {
         assert(contract, 'contract')
       })
     }
-    load('eosio')
-    load('eosio.token')
+    load('enumivo')
+    load('enu.token')
   })
 
   describe('transactions', () => {
@@ -239,9 +239,9 @@ if(process.env['NODE_ENV'] === 'development') {
     it('create asset', async function() {
       const eos = Eos({signProvider})
       const pubkey = 'EOS6MRyAjQq8ud7hVNYcfnVPJqcVpscN5So8BhtHuGYqET5GDW5CV'
-      const auth = {authorization: 'eosio.token'}
-      await eos.create('eosio.token', '10000 ' + randomAsset(), auth)
-      await eos.create('eosio.token', '10000.00 ' + randomAsset(), auth)
+      const auth = {authorization: 'enu.token'}
+      await eos.create('enu.token', '10000 ' + randomAsset(), auth)
+      await eos.create('enu.token', '10000.00 ' + randomAsset(), auth)
     })
 
     it('newaccount (broadcast)', () => {
@@ -343,7 +343,7 @@ if(process.env['NODE_ENV'] === 'development') {
     })
 
     it('action to contract', () => {
-      return Eos({signProvider}).contract('eosio.token').then(token => {
+      return Eos({signProvider}).contract('enu.token').then(token => {
         return token.transfer('inita', 'initb', '1 SYS', '')
           // transaction sent on each command
           .then(tr => {
@@ -369,14 +369,14 @@ if(process.env['NODE_ENV'] === 'development') {
       }
 
       //  contracts can be a string or array
-      await assertTr(await eos.transaction(['eosio.token'], ({eosio_token}) => trTest(eosio_token)))
-      await assertTr(await eos.transaction('eosio.token', eosio_token => trTest(eosio_token)))
+      await assertTr(await eos.transaction(['enu.token'], ({eosio_token}) => trTest(eosio_token)))
+      await assertTr(await eos.transaction('enu.token', eosio_token => trTest(eosio_token)))
     })
 
     it('action to contract (contract tr nesting)', function () {
       this.timeout(4000)
       const tn = Eos({signProvider})
-      return tn.contract('eosio.token').then(eosio_token => {
+      return tn.contract('enu.token').then(eosio_token => {
         return eosio_token.transaction(tr => {
           tr.transfer('inita', 'initb', '1 SYS', '')
           tr.transfer('inita', 'initc', '2 SYS', '')

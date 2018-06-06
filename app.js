@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var path = require('path');
 var Eos = require('./eos-pro/eosjs/src/index');
-var eos = Eos({httpEndpoint: 'http://192.99.200.155:8888', chainId: "7d47aae09c97dbc21d52c6d9f17bb70a1f1f2fda5f81b3ef18979b74b2070d8c"});
+var eos = Eos({httpEndpoint: 'http://172.105.215.62:8000', chainId: "cf057bbfb72640471fd910bcb67639c22df9f92470936cddc1ade0e2f2e7dc4f"});
 
 
 
@@ -84,7 +84,7 @@ app.post('/lookupacct', function(req, res, status){
 });
 
 app.post('/getbalance', function (req, res){
-	eos.getTableRows({code: 'eosio.token', scope: req.body.targetAcct, table: 'accounts', json: true}).then(result2=>{
+	eos.getTableRows({code: 'enu.token', scope: req.body.targetAcct, table: 'accounts', json: true}).then(result2=>{
 		res.send(result2.rows);
 		res.end();
 	}).catch(err=>{res.send({e: err}); res.end();});
@@ -100,7 +100,7 @@ app.post('/pubtoacct', function(req, res){
 		let account = result.account_name;
 		let requiredkey = result.permissions[0].required_auth.keys[0].key;
 		if (result.account_name) {
-			eos.getTableRows({code: 'eosio.token', scope: req.body.account_target, table: 'accounts', json: true}).then(result2=>{
+			eos.getTableRows({code: 'enu.token', scope: req.body.account_target, table: 'accounts', json: true}).then(result2=>{
 				let balances = result2;
 				res.send({
 					returnkey: requiredkey,

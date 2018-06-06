@@ -219,8 +219,8 @@ keyProvider = '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'
 
 eos = Eos({keyProvider})
 
-wasm = fs.readFileSync(`docker/contracts/eosio.token/eosio.token.wasm`)
-abi = fs.readFileSync(`docker/contracts/eosio.token/eosio.token.abi`)
+wasm = fs.readFileSync(`docker/contracts/enu.token/enu.token.wasm`)
+abi = fs.readFileSync(`docker/contracts/enu.token/enu.token.abi`)
 
 // Publish contract to the blockchain
 eos.setcode('inita', 0, 0, wasm)
@@ -262,7 +262,7 @@ eos.transaction('currency', currency => {
 })
 
 // mix contracts in the same transaction
-eos.transaction(['currency', 'eosio.token'], ({currency, eosio_token}) => {
+eos.transaction(['currency', 'enu.token'], ({currency, eosio_token}) => {
   currency.transfer('inita', 'initb', '1 CUR', '')
   eosio_token.transfer('inita', 'initb', '1 SYS', '')
 })
@@ -294,7 +294,7 @@ eos = Eos({keyProvider: '5KQwrPbwdL6PhXujxW37FSSQZ1JiwsST4cqQzDeyXtP79zkvFD3'})
 eos.transaction({
   actions: [
     {
-      account: 'eosio.token',
+      account: 'enu.token',
       name: 'transfer',
       authorization: [{
         actor: 'inita',
@@ -338,7 +338,7 @@ buffer = eos.fc.toBuffer('extensions_type', type)
 assert.deepEqual(type, eos.fc.fromBuffer('extensions_type', buffer))
 
 // ABI Serialization
-eos.contract('eosio.token', (error, c) => eosio_token = c)
+eos.contract('enu.token', (error, c) => eosio_token = c)
 create = {issuer: 'inita', maximum_supply: '1.0000 SYS'}
 buffer = eosio_token.fc.toBuffer('create', create)
 assert.deepEqual(create, eosio_token.fc.fromBuffer('create', buffer))

@@ -7,5 +7,5 @@ function process() {
   mv ./$2 ../src/schema
 }
 
-process eosio.token eosio_token.json
-process eosio.system eosio_system.json
+process enu.token eosio_token.json
+process enu.system eosio_system.json
